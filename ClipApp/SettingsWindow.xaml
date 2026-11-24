@@ -1,0 +1,150 @@
+﻿<Window x:Class="ClipApp.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SlotPaste: настройки" Width="500" SizeToContent="Height" Icon="/SlotPaste.ico"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True"
+        Background="{DynamicResource WindowBg}" Foreground="{DynamicResource Text}" UseLayoutRounding="True">
+    <Window.Resources>
+        <!-- общий вид для всех полей, где ловим сочетание клавиш: только для чтения, ловят нажатия.
+             BasedOn: берём обычный вид поля из темы (Theme.cs) и добавляем своё -->
+        <Style x:Key="HotkeyBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="0,3"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsReadOnlyCaretVisible" Value="False"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <EventSetter Event="PreviewKeyDown" Handler="HotkeyBox_PreviewKeyDown"/>
+        </Style>
+        <!-- подписи слева от полей -->
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+        <!-- мелкие серые пояснения -->
+        <Style TargetType="TextBlock" x:Key="Hint">
+            <Setter Property="Foreground" Value="{DynamicResource SubtleText}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="16,10,16,16">
+        <TabControl>
+
+            <!-- Вкладка 1: все сочетания клавиш. В Tag у поля лежит его название для сообщений об ошибках -->
+            <TabItem Header="Сочетания клавиш">
+                <Grid Margin="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="Открыть окно истории"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="PopupBox" Style="{StaticResource HotkeyBox}" Tag="Окно истории"/>
+
+                    <TextBlock Grid.Row="1" Style="{StaticResource Label}" Text="Закрепить / открепить (в окне программы)" TextWrapping="Wrap"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="PinBox" Style="{StaticResource HotkeyBox}" Tag="Закрепить"/>
+
+                    <TextBlock Grid.Row="2" Style="{StaticResource Label}" Text="Исправить раскладку выделенного"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="LayoutBox" Style="{StaticResource HotkeyBox}" Tag="Исправить раскладку"/>
+
+                    <TextBlock Grid.Row="3" Style="{StaticResource Label}" Text="Режим очереди: вкл / выкл"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="QueueBox" Style="{StaticResource HotkeyBox}" Tag="Режим очереди"/>
+
+                    <TextBlock Grid.Row="4" Style="{StaticResource Label}" Text="Вставить следующий из очереди"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="QueueNextBox" Style="{StaticResource HotkeyBox}" Tag="Следующий из очереди"/>
+
+                    <TextBlock Grid.Row="5" Style="{StaticResource Label}" Text="Пауза записи истории"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" x:Name="PauseBox" Style="{StaticResource HotkeyBox}" Tag="Пауза записи"/>
+
+                    <TextBlock Grid.Row="6" Style="{StaticResource Label}" Text="Следующий набор ячеек"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="NextSetBox" Style="{StaticResource HotkeyBox}" Tag="Следующий набор"/>
+
+                    <TextBlock Grid.Row="7" Style="{StaticResource Label}" Text="Положить выделенное в ячейку"/>
+                    <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Margin="0,3">
+                        <ComboBox x:Name="CopyModsBox" Width="100"/>
+                        <TextBlock Text="  + цифра 1–9" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="8" Style="{StaticResource Label}" Text="Вставить из ячейки"/>
+                    <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" Margin="0,3">
+                        <ComboBox x:Name="PasteModsBox" Width="100"/>
+                        <TextBlock Text="  + цифра 1–9" VerticalAlignment="Center" Foreground="{DynamicResource Text}"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Margin="0,10,0,0" Style="{StaticResource Hint}"
+                               Text="Кликни в поле и нажми нужное сочетание, в нём должен быть Ctrl или Alt. «Следующий из очереди» занимается, только пока очередь включена."/>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка 2: приватность -->
+            <TabItem Header="Приватность">
+                <StackPanel Margin="2,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Хранить историю, дней:" VerticalAlignment="Center" Width="190"/>
+                        <TextBox x:Name="DaysBox" Width="70"/>
+                        <TextBlock Text="  0 = всегда" Foreground="{DynamicResource SubtleText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="Сколько записей хранить:" VerticalAlignment="Center" Width="190"/>
+                        <TextBox x:Name="MaxBox" Width="70"/>
+                        <TextBlock Text="  от 10 до 10000" Foreground="{DynamicResource SubtleText}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="Закреплённые и ячейки никогда не удаляются автоматически."
+                               Style="{StaticResource Hint}" Margin="0,6,0,0"/>
+
+                    <TextBlock Text="Не записывать то, что скопировано из программ (через запятую):" Margin="0,16,0,6" TextWrapping="Wrap"/>
+                    <TextBox x:Name="IgnoredBox" TextWrapping="Wrap" Height="56" VerticalContentAlignment="Top"
+                             VerticalScrollBarVisibility="Auto"/>
+                    <TextBlock Style="{StaticResource Hint}" Margin="0,6,0,0"
+                               Text="Пароли, которые менеджеры паролей помечают как секретные, не записываются в любом случае."/>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Вкладка 3: тема и где лежат данные -->
+            <TabItem Header="Вид и данные">
+                <StackPanel Margin="2,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Тема:" VerticalAlignment="Center" Width="190"/>
+                        <!-- порядок пунктов = номер темы в настройках: 0 системная, 1 светлая, 2 тёмная -->
+                        <ComboBox x:Name="ThemeBox" Width="180" SelectionChanged="ThemeBox_SelectionChanged">
+                            <ComboBoxItem Content="Как в Windows"/>
+                            <ComboBoxItem Content="Светлая"/>
+                            <ComboBoxItem Content="Тёмная"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource Hint}" Margin="0,6,0,0"
+                               Text="Тема меняется сразу, чтобы можно было посмотреть. Если нажать «Отмена», вернётся прежняя."/>
+
+                    <TextBlock Text="Где хранятся история и настройки:" Margin="0,18,0,6"/>
+                    <DockPanel>
+                        <Button DockPanel.Dock="Right" Content="Открыть папку" Margin="8,0,0,0" Click="OpenDataFolder_Click"/>
+                        <TextBox x:Name="DataFolderBox" IsReadOnly="True"/>
+                    </DockPanel>
+                    <TextBlock x:Name="PortableText" Style="{StaticResource Hint}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+
+        <TextBlock x:Name="ErrorText" Foreground="{DynamicResource Error}" TextWrapping="Wrap" Margin="0,12,0,0"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="По умолчанию" Margin="0,0,8,0" Click="Defaults_Click"/>
+            <Button Content="Сохранить" MinWidth="96" Margin="0,0,8,0" Style="{StaticResource AccentButton}" Click="Save_Click"/>
+            <Button Content="Отмена" MinWidth="96" IsCancel="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

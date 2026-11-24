@@ -1,0 +1,65 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Результаты сборки / build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm64/
+[Ll]og/
+[Ll]ogs/
+publish/
+artifacts/
+
+# Опубликованные пакеты и архивы / published packages
+*.zip
+*.7z
+*.nupkg
+*.snupkg
+
+# Профили публикации: сам .pubxml нужен в репозитории, а файлы с паролями — нет
+*.pubxml.user
+*.publishproj
+*.azurePubxml
+PublishScripts/
+
+# Отладка и кэши / debug files and caches
+*.pdb
+*.ilk
+*.cache
+*.tmp
+*.log
+*.binlog
+_ReSharper*/
+*.DotSettings.user
+.idea/
+.vscode/
+TestResults/
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+
+# NuGet
+packages/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+
+# Данные программы при запуске в portable-режиме / runtime data
+Data/
+portable.txt
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
