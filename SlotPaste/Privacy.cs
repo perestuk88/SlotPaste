@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Проверка, можно ли записывать то, что сейчас в буфере (пароли записывать не надо)
     public static class Privacy

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Вариант модификаторов для ячеек: название для списка и код для Windows
     public record ModOption(string Name, uint Mods)

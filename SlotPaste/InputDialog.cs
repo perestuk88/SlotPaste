@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Маленькое окошко «введи текст» (в WPF готового такого нет, поэтому собираем его прямо в коде)
     public static class InputDialog

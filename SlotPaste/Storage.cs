@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Один набор ячеек 1–9 (например «Основной» или «Работа»)
     public class SlotSet

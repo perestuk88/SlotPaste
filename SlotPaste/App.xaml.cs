@@ -2,7 +2,7 @@
 using System.Windows;
 using Forms = System.Windows.Forms;
 
-namespace ClipApp
+namespace SlotPaste
 {
     public partial class App : System.Windows.Application
     {
@@ -27,7 +27,7 @@ namespace ClipApp
             };
 
             _pauseItem = new Forms.ToolStripMenuItem("Пауза записи");
-            _pauseItem.Click += (s, a) => (MainWindow as ClipApp.MainWindow)?.TogglePause();
+            _pauseItem.Click += (s, a) => (MainWindow as SlotPaste.MainWindow)?.TogglePause();
 
             _menu = new Forms.ContextMenuStrip();
             _menu.Items.Add("Открыть", null, (s, a) => ShowMain());
@@ -54,7 +54,7 @@ namespace ClipApp
         private void ShowSettings()
         {
             if (_settingsWindow != null) { _settingsWindow.Activate(); return; }
-            if (MainWindow is not ClipApp.MainWindow main) return;
+            if (MainWindow is not SlotPaste.MainWindow main) return;
 
             _settingsWindow = new SettingsWindow(main);
             _settingsWindow.Closed += (s, a) => _settingsWindow = null;

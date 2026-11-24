@@ -6,7 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace ClipApp
+namespace SlotPaste
 {
     public partial class MainWindow : System.Windows.Window
     {

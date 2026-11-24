@@ -81,13 +81,13 @@ History, pinned entries and slots are in `data.json`, settings are in `settings.
 
 Requirements: Windows, Visual Studio 2022 or 2026 with the ".NET desktop development" workload, and the .NET 10 SDK.
 
-1. Clone the repository and open the solution (the project file is `ClipApp.csproj`; the program itself is built as `SlotPaste.exe`).
+1. Clone the repository and open the solution (`SlotPaste.slnx`).
 2. Press F5 to build and run.
 
-Portable single-file build: in Visual Studio, right-click the project → **Publish** → choose the **Portable** profile → **Publish**. Or from a terminal in the folder with `ClipApp.csproj`:
+Portable single-file build: in Visual Studio, right-click the project → **Publish** → choose the **Portable** profile → **Publish**. Or from a terminal in the folder with `SlotPaste.csproj`:
 
 ```
-dotnet publish ClipApp.csproj -p:PublishProfile=Portable
+dotnet publish SlotPaste.csproj -p:PublishProfile=Portable
 ```
 
 The result is `bin\Release\net10.0-windows\win-x64\publish\SlotPaste.exe`. Add an empty `portable.txt` next to it to make it portable.
@@ -162,13 +162,13 @@ SlotPaste — менеджер буфера обмена для Windows на WPF
 
 Нужно: Windows, Visual Studio 2022 или 2026 с рабочей нагрузкой «Разработка классических приложений .NET» и .NET 10 SDK.
 
-1. Склонируй репозиторий и открой решение (файл проекта называется `ClipApp.csproj`, программа собирается в `SlotPaste.exe`).
+1. Склонируй репозиторий и открой решение (`SlotPaste.slnx`).
 2. Нажми F5, чтобы собрать и запустить.
 
-Портативный exe одним файлом: в Visual Studio правый клик по проекту → **Опубликовать** → профиль **Portable** → **Опубликовать**. Или в терминале в папке с `ClipApp.csproj`:
+Портативный exe одним файлом: в Visual Studio правый клик по проекту → **Опубликовать** → профиль **Portable** → **Опубликовать**. Или в терминале в папке с `SlotPaste.csproj`:
 
 ```
-dotnet publish ClipApp.csproj -p:PublishProfile=Portable
+dotnet publish SlotPaste.csproj -p:PublishProfile=Portable
 ```
 
 Готовый файл: `bin\Release\net10.0-windows\win-x64\publish\SlotPaste.exe`. Положи рядом пустой `portable.txt`, чтобы он стал портативным.

@@ -1,7 +1,7 @@
-﻿<Window x:Class="ClipApp.MainWindow"
+﻿<Window x:Class="SlotPaste.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SlotPaste" Height="460" Width="520" Icon="/SlotPaste.ico" Topmost="True"
+        Title="SlotPaste" Height="460" Width="540" MinWidth="380" MinHeight="320" Icon="/SlotPaste.ico" Topmost="True"
         Background="{DynamicResource WindowBg}" Foreground="{DynamicResource Text}" UseLayoutRounding="True"
         PreviewKeyDown="Window_PreviewKeyDown">
     <Window.Resources>
@@ -86,14 +86,19 @@
             <!-- Вкладка 3: ячейки 1–9 из выбранного набора -->
             <TabItem Header="Ячейки">
                 <DockPanel>
-                    <!-- выбор набора и кнопки; Focusable="False", чтобы Enter и Delete продолжали работать со списком -->
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
-                        <TextBlock Text="Набор:" VerticalAlignment="Center" Margin="0,0,6,0"/>
-                        <ComboBox x:Name="SetBox" Width="130" Focusable="False" SelectionChanged="SetBox_SelectionChanged"/>
-                        <Button Content="Добавить" Padding="10,4" Margin="6,0,0,0" Focusable="False" Click="AddSet_Click"/>
-                        <Button Content="Переименовать" Padding="10,4" Margin="6,0,0,0" Focusable="False" Click="RenameSet_Click"/>
-                        <Button Content="Удалить" Padding="10,4" Margin="6,0,0,0" Focusable="False" Click="DeleteSet_Click"/>
-                    </StackPanel>
+                    <!-- выбор набора и кнопки; Focusable="False", чтобы Enter и Delete продолжали работать со списком.
+                         WrapPanel: если окно узкое, кнопки целиком переезжают на вторую строку, а не обрезаются -->
+                    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,2">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,12,6">
+                            <TextBlock Text="Набор:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <ComboBox x:Name="SetBox" Width="140" Focusable="False" SelectionChanged="SetBox_SelectionChanged"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                            <Button Content="Добавить" Padding="10,4" Focusable="False" Click="AddSet_Click"/>
+                            <Button Content="Переименовать" Padding="10,4" Margin="6,0,0,0" Focusable="False" Click="RenameSet_Click"/>
+                            <Button Content="Удалить" Padding="10,4" Margin="6,0,0,0" Focusable="False" Click="DeleteSet_Click"/>
+                        </StackPanel>
+                    </WrapPanel>
                     <!-- текст подсказки подставляется из кода под текущие хоткеи -->
                     <TextBlock x:Name="SlotsHint" DockPanel.Dock="Top" Margin="0,0,0,8" Foreground="{DynamicResource SubtleText}" TextWrapping="Wrap"/>
                     <ListBox x:Name="SlotsList"

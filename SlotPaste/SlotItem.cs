@@ -1,4 +1,4 @@
-﻿namespace ClipApp
+﻿namespace SlotPaste
 {
     // Одна строчка во вкладке «Ячейки»: номер ячейки и что в ней лежит
     public class SlotItem

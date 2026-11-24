@@ -5,7 +5,7 @@ using Microsoft.Win32;
 using Forms = System.Windows.Forms;
 using Media = System.Windows.Media;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Тема оформления: светлая или тёмная.
     // Всё лежит в одном файле, никаких отдельных .xaml не нужно:
@@ -46,6 +46,11 @@ namespace ClipApp
 
             // меняем словарь с цветами на новый: всё, что на него ссылается через DynamicResource, перекрасится
             var dicts = app.Resources.MergedDictionaries;
+
+            // при первом запуске убираем «черновые» цвета из App.xaml: они нужны только
+            // конструктору Visual Studio, чтобы он видел имена WindowBg, Text, AccentButton и т.д.
+            if (_colors == null) dicts.Clear();
+
             var colors = BuildColors(IsDark);
             if (_colors != null) dicts.Remove(_colors);
             dicts.Insert(0, colors);

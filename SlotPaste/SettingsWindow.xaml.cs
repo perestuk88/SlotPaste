@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using TextBox = System.Windows.Controls.TextBox;
 
-namespace ClipApp
+namespace SlotPaste
 {
     public partial class SettingsWindow : System.Windows.Window
     {

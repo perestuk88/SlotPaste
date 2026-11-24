@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ClipApp
+namespace SlotPaste
 {
     // Всё, что программа умеет делать с текстом: исправить раскладку, поменять регистр, убрать лишние пробелы
     public static class TextTools
